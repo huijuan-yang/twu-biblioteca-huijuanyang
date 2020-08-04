@@ -29,14 +29,14 @@ public class Library {
                     System.out.println("Current User: \n" + "Name: " + user.getName() + "\nEmail: " + user.getEmail() +
                             "\nPhone Number: " + user.getPhoneNumber() + "\nLibrary Number: " + user.getLibraryNumber());
 
-                    User existUser = new UserOperate(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getLibraryNumber(), user.getPassword());
+                    UserOperate existUser = new UserOperate(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getLibraryNumber(), user.getPassword());
 
                     while (true) {
                         System.out.println("Please choose your operation: 1.Go into library  2.Quit");
                         int choice = scanner.nextInt();
                         if (choice == 2) {
                             System.out.println("Quit!");
-                            break;
+                            return;
                         } else if (choice == 1) {
                             existUser.operate();
                         } else {

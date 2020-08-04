@@ -8,6 +8,7 @@ public class Book {
     private final String author;
     private final int publishedYear;
     private boolean isAvailable;
+    private String borrower;
 
     public Book(String isbn, String name, String author, int publishedYear) {
         this.isbn = isbn;
@@ -15,6 +16,7 @@ public class Book {
         this.author = Objects.requireNonNull(author);
         this.publishedYear = publishedYear;
         this.isAvailable = true;
+        this.borrower = "";
     }
 
     public String getIsbn() { return isbn; }
@@ -28,6 +30,10 @@ public class Book {
     public boolean getAvailable() { return isAvailable; }
 
     public void setAvailable(boolean boo) { this.isAvailable = boo; }
+
+    public String getBorrower() { return borrower; }
+
+    public void setBorrower(String borrower) { this.borrower = borrower; }
 
 }
 

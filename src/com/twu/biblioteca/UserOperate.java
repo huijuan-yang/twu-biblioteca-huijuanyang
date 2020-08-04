@@ -70,7 +70,8 @@ public class UserOperate extends User {
         StringBuilder allBooksList = new StringBuilder();
         for (Book book : books) {
             allBooksList.append("Name: ").append(book.getName()).append(" | Author: ")
-                    .append(book.getAuthor()).append(" | Published Year: ").append(book.getPublishedYear()).append("\n");
+                    .append(book.getAuthor()).append(" | Published Year: ").append(book.getPublishedYear())
+                    .append(" | Borrower: ").append(book.getBorrower()).append("\n");
         }
 
         System.out.println(allBooksList.toString());
@@ -97,6 +98,7 @@ public class UserOperate extends User {
         for (Book book : books) {
             if (book.getIsbn().equals(isbn) && book.getAvailable()) {
                 book.setAvailable(false);
+                book.setBorrower(this.getLibraryNumber());
                 checkOutResult = result.getCheckOutBookSuccessful();
                 break;
             } else {
@@ -114,6 +116,7 @@ public class UserOperate extends User {
         for (Book book : books) {
             if (book.getIsbn().equals(isbn)) {
                 book.setAvailable(true);
+                book.setBorrower("");
                 returnResult = result.getReturnBookSuccessful();
                 break;
             } else {
