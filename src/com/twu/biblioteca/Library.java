@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.Scanner;
 
-public class Account {
+public class Library {
     Scanner scanner = new Scanner(System.in);
 
     public String printWelcomeMessage() {
@@ -23,7 +23,7 @@ public class Account {
             System.out.println("Please enter your phone number: ");
             int userPhoneNumber = scanner.nextInt();
 
-            User user = new User(userName, userEmail, userPhoneNumber);
+            UserOperate user = new UserOperate(userName, userEmail, userPhoneNumber);
             System.out.println("Login successful!");
             System.out.println("Current User: \n" + "name: " + user.getName() + "\nemail: " + user.getEmail() + "\nphone number: " + user.getPhoneNumber());
 

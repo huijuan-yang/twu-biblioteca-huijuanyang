@@ -3,17 +3,7 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Person {
-    public String name;
-    public String email;
-    public int phoneNumber;
-
-    public Person(String name, String email, int phoneNumber) {
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
+public class Repository {
     public static List<Book> books = new ArrayList<>();
     public static List<Movie> movies = new ArrayList<>();
 
@@ -30,13 +20,5 @@ abstract class Person {
         movies.add(new Movie("Charlotte's Web", 2006, "Gary Winick", 8.6));
         movies.add(new Movie("Forrest Gump", 1994, "Robert Zemeckis", 9.6));
     }
-
-    public String getName() { return name; }
-
-    public String getEmail() { return email; }
-
-    public int getPhoneNumber() { return phoneNumber; }
-
-    public abstract void operate();
 
 }
