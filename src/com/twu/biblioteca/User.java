@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class User extends Person implements Operate {
+public class User extends Person {
     private String userName;
     private String userEmail;
     private int userPhoneNumber;
@@ -15,13 +15,13 @@ public class User extends Person implements Operate {
 
     Scanner scanner = new Scanner(System.in);
 
-    Repository repository = new Repository();
-    List<Book> books = repository.getBookList();
-    List<Movie> movies = repository.getMoviesList();
+    public List<Book> getBooks() { return books; }
+    public List<Movie> getMovies() { return movies; }
 
-    @Override
+
     public void operate() {
-        System.out.println("Please enter your choice: ");
+        System.out.println("Please enter your choice:\n 1.All Books  2.Available Books  3.Check Out Book  4.Return Book\n " +
+                "5.All Movies  6.Available Movies  7.Check Out Movie  8.Return Movie\n 9.Quit");
         int choice = scanner.nextInt();
         switch (choice) {
             case 1:
@@ -56,12 +56,16 @@ public class User extends Person implements Operate {
                 String nameOfReturnedMovie = scanner.next();
                 returnMovie(nameOfReturnedMovie);
                 break;
+            case 9:
+                System.out.println("Quit!");
+                break;
             default:
                 System.out.println("Wrong input!");
+                operate();
         }
     }
 
-    @Override
+
     public String showAllBooks() {
         StringBuilder allBooksList = new StringBuilder();
         for (Book book : books) {
@@ -73,7 +77,7 @@ public class User extends Person implements Operate {
         return allBooksList.toString();
     }
 
-    @Override
+
     public String showAllAvailableBooks() {
         StringBuilder allAvailableBooks = new StringBuilder();
         for (Book book : books.stream().filter(Book::getAvailable).collect(Collectors.toList())) {
@@ -81,12 +85,13 @@ public class User extends Person implements Operate {
                     .append(book.getAuthor()).append(" | Published Year: ").append(book.getPublishedYear()).append("\n");
         }
 
+        System.out.println(allAvailableBooks.toString());
         return allAvailableBooks.toString();
     }
 
+
     Result result = new Result();
 
-    @Override
     public String checkOutBook(String isbn) {
         String checkOutResult = "";
         for (int i = 0; i < books.size(); i++) {
@@ -99,10 +104,11 @@ public class User extends Person implements Operate {
             }
         }
 
+        System.out.println(checkOutResult);
         return checkOutResult;
     }
 
-    @Override
+
     public String returnBook(String isbn) {
         String returnResult = "";
         for (Book book : books) {
@@ -115,10 +121,11 @@ public class User extends Person implements Operate {
             }
         }
 
+        System.out.println(returnResult);
         return returnResult;
     }
 
-    @Override
+
     public String showAllMovies() {
         StringBuilder allMoviesList = new StringBuilder();
         for (Movie movie : movies) {
@@ -131,7 +138,7 @@ public class User extends Person implements Operate {
         return allMoviesList.toString();
     }
 
-    @Override
+
     public String showAllAvailableMovies() {
         StringBuilder allAvailableMovies = new StringBuilder();
         for (Movie movie : movies.stream().filter(Movie::getStatus).collect(Collectors.toList())) {
@@ -140,10 +147,11 @@ public class User extends Person implements Operate {
                     .append(movie.getRate()).append("\n");
         }
 
+        System.out.println(allAvailableMovies.toString());
         return allAvailableMovies.toString();
     }
 
-    @Override
+
     public String checkOutMovie(String name) {
         String checkoutResult = "";
         for (int i = 0; i < movies.size(); i++) {
@@ -156,10 +164,11 @@ public class User extends Person implements Operate {
             }
         }
 
+        System.out.println(checkoutResult);
         return checkoutResult;
     }
 
-    @Override
+
     public String returnMovie(String name) {
         String returnResult = "";
         for (Movie movie : movies) {
@@ -172,6 +181,7 @@ public class User extends Person implements Operate {
             }
         }
 
+        System.out.println(returnResult);
         return returnResult;
     }
 }

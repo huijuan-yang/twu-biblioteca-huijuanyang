@@ -7,12 +7,12 @@ public class Movie {
     private double rate;
     private boolean status;
 
-    public Movie(String name, int year, String director, double rate, boolean status) {
+    public Movie(String name, int year, String director, double rate) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.rate = rate;
-        this.status = status;
+        this.status = true;
     }
 
     public String getName() { return name; };

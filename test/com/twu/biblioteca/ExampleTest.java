@@ -1,10 +1,6 @@
 package com.twu.biblioteca;
 
-
 import org.junit.Test;
-import java.util.List;
-import java.util.stream.Stream;
-
 import static org.junit.Assert.*;
 
 
@@ -12,10 +8,6 @@ public class ExampleTest {
 
     Account account = new Account();
     User user = new User("huijuan", "huijuanyang@thoughtworks.com", 123456789);
-
-    Repository repository = new Repository();
-    List<Book> books = repository.getBookList();
-    List<Movie> movies = repository.getMoviesList();
 
     @Test
     public void should_Print_Welcome_Message_Test() {
@@ -34,7 +26,7 @@ public class ExampleTest {
     @Test
     public void should_Check_Out_Book_By_Isbn_Test() {
         user.checkOutBook("9780321356680");
-        assertFalse(books.stream().filter(element -> element.getIsbn() == "9780321356680").allMatch(Book::getAvailable));
+        assertFalse(user.getBooks().stream().filter(element -> element.getIsbn() == "9780321356680").allMatch(Book::getAvailable));
     }
 
     @Test
@@ -52,7 +44,7 @@ public class ExampleTest {
     @Test
     public void should_Return_Book_By_Isbn_Test() {
         user.returnBook("9780321356680");
-        assertTrue(books.stream().filter(element -> element.getIsbn() == "9780321356680").allMatch(Book::getAvailable));
+        assertTrue(user.getBooks().stream().filter(element -> element.getIsbn() == "9780321356680").allMatch(Book::getAvailable));
     }
 
     @Test
@@ -75,6 +67,6 @@ public class ExampleTest {
     @Test
     public  void should_Check_Out_Movie_By_Name_Test() {
         user.checkOutMovie("The Croods");
-        assertFalse(movies.stream().filter(element -> element.getName() == "The Croods").allMatch(Movie::getStatus));
+        assertFalse(user.getMovies().stream().filter(element -> element.getName() == "The Croods").allMatch(Movie::getStatus));
     }
 }

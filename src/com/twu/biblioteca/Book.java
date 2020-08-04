@@ -9,12 +9,12 @@ public class Book {
     private int publishedYear;
     private boolean isAvailable;
 
-    public Book(String isbn, String name, String author, int publishedYear, boolean isAvailable) {
+    public Book(String isbn, String name, String author, int publishedYear) {
         this.isbn = isbn;
         this.name = Objects.requireNonNull(name);
         this.author = Objects.requireNonNull(author);
         this.publishedYear = publishedYear;
-        this.isAvailable = isAvailable;
+        this.isAvailable = true;
     }
 
     public String getIsbn() { return isbn; }
