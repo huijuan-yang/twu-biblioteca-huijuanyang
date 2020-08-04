@@ -2,8 +2,8 @@ package com.twu.biblioteca;
 
 
 import org.junit.Test;
-
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,10 @@ public class ExampleTest {
     Account account = new Account();
     User user = new User("huijuan", "huijuanyang@thoughtworks.com", 123456789);
 
+    Repository repository = new Repository();
+    List<Book> books = repository.getBookList();
+    List<Movie> movies = repository.getMoviesList();
+
     @Test
     public void should_Print_Welcome_Message_Test() {
         assertEquals("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!", account.printWelcomeMessage());
@@ -21,17 +25,21 @@ public class ExampleTest {
     @Test
     public void should_Show_All_Books_Test() {
         assertNotNull(user.showAllBooks());
+        assertEquals("Name: Effective Java | Author: Joshua Bloch | Published Year: 2001\n" +
+                "Name: Clean Code | Author: Robert C. Martin | Published Year: 2009\n" +
+                "Name: Head First Design Patterns | Author: Eric Freeman | Published Year: 2015\n" +
+                "Name: Spring in Action | Author: Craig Walls | Published Year: 2005\n", user.showAllBooks());
     }
 
     @Test
     public void should_Check_Out_Book_By_Isbn_Test() {
-        user.checkOutBook("00000");
-        assertEquals(user.showAllBooks().size() - 1, user.showAllAvailableBooks().size());
+        user.checkOutBook("9780321356680");
+        assertFalse(books.stream().filter(element -> element.getIsbn() == "9780321356680").allMatch(Book::getAvailable));
     }
 
     @Test
     public void should_Return_Message_When_Check_Out_Successful_Test() {
-        String successfulResult = user.checkOutBook("00000");
+        String successfulResult = user.checkOutBook("9780321356680");
         assertEquals("Thank you! Enjoy the book!", successfulResult);
     }
 
@@ -43,13 +51,13 @@ public class ExampleTest {
 
     @Test
     public void should_Return_Book_By_Isbn_Test() {
-        user.returnBook("00000");
-        assertEquals(user.showAllBooks().size(), user.showAllAvailableBooks().size());
+        user.returnBook("9780321356680");
+        assertTrue(books.stream().filter(element -> element.getIsbn() == "9780321356680").allMatch(Book::getAvailable));
     }
 
     @Test
     public void should_Return_Message_When_Return_Successful_Test() {
-        String successfulResult = user.returnBook("00000");
+        String successfulResult = user.returnBook("9780321356680");
         assertEquals("Thank you for returning the book!", successfulResult);
     }
 
@@ -61,14 +69,12 @@ public class ExampleTest {
 
     @Test
     public void should_Show_All_Available_Movies_Test() {
-        List<Movie> availableMoviesList = user.showAllAvailableMovies();
         assertNotNull(user.showAllAvailableMovies());
-        assertTrue(availableMoviesList.stream().allMatch(Movie::getStatus));
     }
 
     @Test
     public  void should_Check_Out_Movie_By_Name_Test() {
         user.checkOutMovie("The Croods");
-        assertEquals(3, user.showAllAvailableMovies().size());
+        assertFalse(movies.stream().filter(element -> element.getName() == "The Croods").allMatch(Movie::getStatus));
     }
 }

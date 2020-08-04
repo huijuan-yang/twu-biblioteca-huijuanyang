@@ -15,6 +15,10 @@ public class Administrator extends Person implements Operate {
 
     Scanner scanner = new Scanner(System.in);
 
+    Repository repository = new Repository();
+    List<Book> books = repository.getBookList();
+    List<Movie> movies = repository.getMoviesList();
+
     @Override
     public void operate() {
         System.out.println("Please enter your choice: ");
@@ -58,13 +62,28 @@ public class Administrator extends Person implements Operate {
     }
 
     @Override
-    public List<Book> showAllBooks() {
-        return books;
+    public String showAllBooks() {
+        StringBuilder allBooksList = new StringBuilder();
+        for (Book book : books) {
+            allBooksList.append("Isbn: ").append(book.getIsbn()).append(" | Name: ")
+                    .append(book.getName()).append(" | Author: ").append(book.getAuthor()).append(" | Published Year: ")
+                    .append(book.getPublishedYear()).append(" | Status: ").append(book.getAvailable()).append("\n");
+        }
+
+        System.out.println(allBooksList.toString());
+        return allBooksList.toString();
     }
 
     @Override
-    public List<Book> showAllAvailableBooks() {
-        return books.stream().filter(Book::getAvailable).collect(Collectors.toList());
+    public String showAllAvailableBooks() {
+        StringBuilder allAvailableBooks = new StringBuilder();
+        for (Book book : books.stream().filter(Book::getAvailable).collect(Collectors.toList())) {
+            allAvailableBooks.append("Isbn: ").append(book.getIsbn()).append(" | Name: ")
+                    .append(book.getName()).append(" | Author: ").append(book.getAuthor()).append(" | Published Year: ")
+                    .append(book.getPublishedYear()).append(" | Status: ").append(book.getAvailable()).append("\n");
+        }
+
+        return allAvailableBooks.toString();
     }
 
     @Override
@@ -94,13 +113,28 @@ public class Administrator extends Person implements Operate {
     }
 
     @Override
-    public List<Movie> showAllMovies() {
-        return movies;
+    public String showAllMovies() {
+        StringBuilder allMoviesList = new StringBuilder();
+        for (Movie movie : movies) {
+            allMoviesList.append("Name: ").append(movie.getName()).append(" | Year: ").append(movie.getYear())
+                    .append(" | Director: ").append(movie.getDirector()).append(" | Rate: ")
+                    .append(movie.getRate()).append(" | Status: ").append(movie.getStatus()).append("\n");
+        }
+
+        System.out.println(allMoviesList.toString());
+        return allMoviesList.toString();
     }
 
     @Override
-    public List<Movie> showAllAvailableMovies() {
-        return movies.stream().filter(Movie::getStatus).collect(Collectors.toList());
+    public String showAllAvailableMovies() {
+        StringBuilder allAvailableMovies = new StringBuilder();
+        for (Movie movie : movies.stream().filter(Movie::getStatus).collect(Collectors.toList())) {
+            allAvailableMovies.append("Name: ").append(movie.getName()).append(" | Year: ").append(movie.getYear())
+                    .append(" | Director: ").append(movie.getDirector()).append(" | Rate: ")
+                    .append(movie.getRate()).append(" | Status: ").append(movie.getStatus()).append("\n");
+        }
+
+        return allAvailableMovies.toString();
     }
 
     @Override
