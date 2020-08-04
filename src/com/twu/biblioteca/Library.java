@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.Scanner;
+import static com.twu.biblioteca.UsersRepository.users;
 
 public class Library {
     Scanner scanner = new Scanner(System.in);
@@ -16,33 +17,46 @@ public class Library {
         int n = scanner.nextInt();
 
         if (n == 1) {
-            System.out.println("Please enter your name: ");
-            String userName = scanner.next();
-            System.out.println("Please enter your email: ");
-            String userEmail = scanner.next();
-            System.out.println("Please enter your phone number: ");
-            int userPhoneNumber = scanner.nextInt();
+            System.out.println("Please enter your library number: ");
+            String userLibraryNumber = scanner.next();
+            System.out.println("Please enter your password: ");
+            String userPassword = scanner.next();
 
-            UserOperate user = new UserOperate(userName, userEmail, userPhoneNumber);
-            System.out.println("Login successful!");
-            System.out.println("Current User: \n" + "name: " + user.getName() + "\nemail: " + user.getEmail() + "\nphone number: " + user.getPhoneNumber());
+            for (User user : users) {
 
-            while (true) {
-                System.out.println("Please choose your operation: 1.Go into library  2.Quit");
-                int choice = scanner.nextInt();
-                if (choice == 2) {
-                    System.out.println("Quit!");
-                    break;
-                } else if (choice == 1){
-                    user.operate();
-                } else {
-                    System.out.println("Please enter a valid choice!");
+                if (user.getLibraryNumber().equals(userLibraryNumber) && user.getPassword().equals(userPassword)) {
+                    System.out.println("Login successful!");
+                    System.out.println("Current User: \n" + "Name: " + user.getName() + "\nEmail: " + user.getEmail() +
+                            "\nPhone Number: " + user.getPhoneNumber() + "\nLibrary Number: " + user.getLibraryNumber());
+
+                    User existUser = new UserOperate(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getLibraryNumber(), user.getPassword());
+
+                    while (true) {
+                        System.out.println("Please choose your operation: 1.Go into library  2.Quit");
+                        int choice = scanner.nextInt();
+                        if (choice == 2) {
+                            System.out.println("Quit!");
+                            break;
+                        } else if (choice == 1) {
+                            existUser.operate();
+                        } else {
+                            System.out.println("Please enter a valid choice!");
+                        }
+                    }
+
                 }
+
             }
-        } else if (n == 2) {
+
+            System.out.println("Login failed! Please enter valid username and password!");
+            login();
+
+    }else if (n == 2) {
             return;
         } else {
             System.out.println("Please select a valid option!");
         }
     }
+
+
 }

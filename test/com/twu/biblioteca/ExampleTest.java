@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ExampleTest {
 
     Library library = new Library();
-    UserOperate user = new UserOperate("huijuan", "huijuanyang@thoughtworks.com", 123456789);
+    UserOperate user = new UserOperate("Amy", "amy@thoughtworks.com", "12534564567", "123-2345", "Amy4567%");
 
     @Test
     public void should_Print_Welcome_Message_Test() {
@@ -55,7 +55,7 @@ public class ExampleTest {
 
     @Test
     public void should_Return_Error_Message_When_Return_Book_Failed_Test() {
-        String failedResult = user.returnBook("abcdefg");
+        String failedResult = user.returnBook("1234567890");
         assertEquals("That is not a valid book to return.", failedResult);
     }
 
@@ -78,7 +78,7 @@ public class ExampleTest {
 
     @Test
     public void should_Return_Error_Message_When_Check_Out_Movie_Failed_Test() {
-        String failedRusult = user.checkOutMovie("abcdefg");
+        String failedRusult = user.checkOutMovie("1234567890");
         assertEquals("Sorry, that movie is not available.", failedRusult);
     }
 

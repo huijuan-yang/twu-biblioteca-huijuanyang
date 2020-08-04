@@ -3,10 +3,10 @@ package com.twu.biblioteca;
 import java.util.Objects;
 
 public class Book {
-    private String isbn;
-    private String name;
-    private String author;
-    private int publishedYear;
+    private final String isbn;
+    private final String name;
+    private final String author;
+    private final int publishedYear;
     private boolean isAvailable;
 
     public Book(String isbn, String name, String author, int publishedYear) {
@@ -19,19 +19,11 @@ public class Book {
 
     public String getIsbn() { return isbn; }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
-
     public String getName() { return name; }
-
-    public void setName(String name) { this.name = name; }
 
     public String getAuthor() { return author; }
 
-    public void setAuthor(String author) { this.author = author; }
-
     public int getPublishedYear() { return publishedYear; }
-
-    public void setPublishedYear(int year) { this.publishedYear = year; }
 
     public boolean getAvailable() { return isAvailable; }
 

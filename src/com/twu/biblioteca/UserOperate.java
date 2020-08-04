@@ -4,16 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static com.twu.biblioteca.Repository.books;
-import static com.twu.biblioteca.Repository.movies;
+import static com.twu.biblioteca.BooksRepository.books;
+import static com.twu.biblioteca.MoviesRepository.movies;
 
 public class UserOperate extends User {
-    private String userName;
-    private String userEmail;
-    private int userPhoneNumber;
 
-    public UserOperate(String name, String email, int phoneNumber) {
-        super (name, email, phoneNumber);
+    public UserOperate(String name, String email, String phoneNumber, String libraryNumber, String password) {
+        super (name, email, phoneNumber, libraryNumber, password);
     }
 
 
@@ -23,7 +20,7 @@ public class UserOperate extends User {
     Scanner scanner = new Scanner(System.in);
 
     public void operate() {
-        System.out.println("Please enter your choice:\n 1.All Books  2.Available Books  3.Check Out Book  4.Return Book\n " +
+        System.out.println("Hi " + this.getName() + "! Please enter your choice:\n 1.All Books  2.Available Books  3.Check Out Book  4.Return Book\n " +
                 "5.All Movies  6.Available Movies  7.Check Out Movie  8.Return Movie\n 9.Quit");
         int choice = scanner.nextInt();
         switch (choice) {
@@ -34,12 +31,12 @@ public class UserOperate extends User {
                 showAllAvailableBooks();
                 break;
             case 3:
-                System.out.println("Please enter the book isbn: ");
+                System.out.println("Hi " + this.getName() + "! Please enter the book isbn: ");
                 String isbnOfBook = scanner.next();
                 checkOutBook(isbnOfBook);
                 break;
             case 4:
-                System.out.println("Please enter the book isbn: ");
+                System.out.println("Hi " + this.getName() + "! Please enter the book isbn: ");
                 String isbnOfReturnedBook = scanner.next();
                 returnBook(isbnOfReturnedBook);
                 break;
@@ -50,12 +47,12 @@ public class UserOperate extends User {
                 showAllAvailableMovies();
                 break;
             case 7:
-                System.out.println("Please enter the movie name: ");
+                System.out.println("Hi " + this.getName() + "! Please enter the movie name: ");
                 String nameOfMovie = scanner.next();
                 checkOutMovie(nameOfMovie);
                 break;
             case 8:
-                System.out.println("Please enter the movie name: ");
+                System.out.println("Hi " + this.getName() + "! Please enter the movie name: ");
                 String nameOfReturnedMovie = scanner.next();
                 returnMovie(nameOfReturnedMovie);
                 break;
