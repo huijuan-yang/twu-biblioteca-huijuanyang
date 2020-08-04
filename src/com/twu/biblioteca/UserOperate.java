@@ -160,6 +160,7 @@ public class UserOperate extends User {
         for (Movie movie : movies) {
             if (movie.getName().equals(name) && movie.getStatus()) {
                 movie.setStatus(false);
+                movie.setBorrower(this.getLibraryNumber());
                 checkoutResult = result.getCheckOutMovieSuccessful();
                 break;
             } else {
@@ -177,6 +178,7 @@ public class UserOperate extends User {
         for (Movie movie : movies) {
             if (movie.getName().equals(name)) {
                 movie.setStatus(true);
+                movie.setBorrower("");
                 returnResult = result.getReturnMovieSuccessful();
                 break;
             } else {

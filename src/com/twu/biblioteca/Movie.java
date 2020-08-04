@@ -6,6 +6,7 @@ public class Movie {
     private final String director;
     private final double rate;
     private boolean status;
+    private String borrower;
 
     public Movie(String name, int year, String director, double rate) {
         this.name = name;
@@ -13,6 +14,7 @@ public class Movie {
         this.director = director;
         this.rate = rate;
         this.status = true;
+        this.borrower = "";
     }
 
     public String getName() { return name; }
@@ -26,6 +28,10 @@ public class Movie {
     public boolean getStatus() { return status; }
 
     public void setStatus(boolean status) { this.status = status; }
+
+    public String getBorrower() { return borrower; }
+
+    public void setBorrower(String borrower) { this.borrower = borrower; }
 
 
 }

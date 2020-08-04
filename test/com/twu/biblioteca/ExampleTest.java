@@ -107,9 +107,31 @@ public class ExampleTest {
     }
 
     @Test
-    public void should_Display_Borrower_Information_Test() {
+    public void should_Display_Borrower_Information_When_Check_Out_Book_Test() {
         user.checkOutBook("9780321356680");
         assertTrue(user.getBooks().stream().filter(element -> element.getIsbn().equals("9780321356680"))
                 .allMatch(element -> element.getBorrower().equals("123-2345")));
     }
+
+    @Test
+    public void should_Delete_Borrower_Information_When_Return_Book_Test() {
+        user.returnBook("9780321356680");
+        assertTrue(user.getBooks().stream().filter(element -> element.getIsbn().equals("9780321356680"))
+                .allMatch(element -> element.getBorrower().equals("")));
+    }
+
+    @Test
+    public void should_Display_Borrower_Information_When_Check_Out_Movie_Test() {
+        user.checkOutMovie("The Croods");
+        assertTrue(user.getMovies().stream().filter(element -> element.getName().equals("The Croods"))
+                .allMatch(element -> element.getBorrower().equals("123-2345")));
+    }
+
+    @Test
+    public void should_Delete_Borrower_Information_When_Return_Movie_Test() {
+        user.returnMovie("The Croods");
+        assertTrue(user.getMovies().stream().filter(element -> element.getName().equals("The Croods"))
+                .allMatch(element -> element.getBorrower().equals("")));
+    }
+
 }
