@@ -1,0 +1,63 @@
+Q1: Who checked out the book 'The Hobbit’?
+
+SQL: SELECT name FROM member WHERE id =
+      (SELECT member_id FROM checkout_item WHERE book_id =
+      (SELECT id FROM book WHERE title = 'The Hobbit'));
+
+Return: Anand Beck
+
+
+
+Q2: How many people have not checked out anything?
+
+SQL: SELECT COUNT(DISTINCT id) FROM member WHERE id NOT IN      (SELECT DISTINCT member_id FROM checkout_item);
+
+Return: 37
+
+
+
+Q3: What books and movies aren't checked out?
+
+SQL: SELECT title From book WHERE id NOT IN 
+     (SELECT book_id FROM checkout_item 
+      WHERE book_id IS not NULL);
+
+Return: Fellowship of the Ring
+        1984
+        Tom Sawyer
+        Catcher in the Rye
+        To Kill a Mockingbird
+        Domain Driven Design
+
+
+SQL: SELECT title From movie WHERE id NOT IN 
+     (SELECT movie_id FROM checkout_item 
+      WHERE movie_id IS not NULL);
+
+Return: Thin Red Line
+        Crouching Tiger, Hidden Dragon
+        Lawrence of Arabia
+        Office Space
+
+
+
+Q4: Add the book 'The Pragmatic Programmer', and add yourself as a member. Check out 'The Pragmatic Programmer'. Use your query from question 1 to verify that you have checked it out. Also, provide the SQL used to update the database.
+
+SQL: INSERT INTO book(id, title) VALUES (11, 'The Pragmatic Programmer');
+     INSERT INTO member(id, name) VALUES (43, 'Huijuan Yang');
+     INSERT INTO checkout_item(member_id, book_id) VALUES (43, 11);
+     SELECT name FROM member WHERE id =
+      (SELECT member_id FROM checkout_item WHERE book_id =
+      (SELECT id FROM book WHERE title = 'The Pragmatic Programmer'));
+
+Return: Huijuan Yang
+
+
+
+Q5: Who has checked out more than 1 item? 
+
+SQL: SELECT name FROM member WHERE id IN (SELECT member_id FROM checkout_item GROUP BY member_id HAVING COUNT(*) > 1 );
+
+Return: Anand Beck
+        Frank Smith
+

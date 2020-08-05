@@ -19,10 +19,10 @@ public class ExampleTest {
     @Test
     public void should_Show_All_Books_Test() {
         assertNotNull(user.showAllBooks());
-        assertEquals("Name: Effective Java | Author: Joshua Bloch | Published Year: 2001\n" +
-                "Name: Clean Code | Author: Robert C. Martin | Published Year: 2009\n" +
-                "Name: Head First Design Patterns | Author: Eric Freeman | Published Year: 2015\n" +
-                "Name: Spring in Action | Author: Craig Walls | Published Year: 2005\n", user.showAllBooks());
+        assertEquals("Name: Effective Java | Author: Joshua Bloch | Published Year: 2001 | Borrower: none\n" +
+                "Name: Clean Code | Author: Robert C. Martin | Published Year: 2009 | Borrower: none\n" +
+                "Name: Head First Design Patterns | Author: Eric Freeman | Published Year: 2015 | Borrower: none\n" +
+                "Name: Spring in Action | Author: Craig Walls | Published Year: 2005 | Borrower: none\n", user.showAllBooks());
     }
 
     @Test
@@ -31,13 +31,7 @@ public class ExampleTest {
         assertFalse(user.getBooks().stream().filter(element -> element.getIsbn().equals("9780321356680"))
                 .allMatch(Book::getAvailable));
     }
-
-    @Test
-    public void should_Return_Message_When_Check_Out_Book_Successful_Test() {
-        String successfulResult = user.checkOutBook("9780321356680");
-        assertEquals("Thank you! Enjoy the book!", successfulResult);
-    }
-
+    
     @Test
     public void should_Return_Error_Message_When_Check_Out_Book_Failed_Test() {
         String failedResult = user.checkOutBook("1234567890");
@@ -53,6 +47,7 @@ public class ExampleTest {
 
     @Test
     public void should_Return_Message_When_Return_Book_Successful_Test() {
+        user.checkOutBook("9780321356680");
         String successfulResult = user.returnBook("9780321356680");
         assertEquals("Thank you for returning the book!", successfulResult);
     }
@@ -76,12 +71,6 @@ public class ExampleTest {
     }
 
     @Test
-    public void should_Return_Message_When_Check_Out_Movie_Successful_Test() {
-        String successfulResult = user.checkOutMovie("001");
-        assertEquals("Thank you! Enjoy the movie!", successfulResult);
-    }
-
-    @Test
     public void should_Return_Error_Message_When_Check_Out_Movie_Failed_Test() {
         String failedResult = user.checkOutMovie("999");
         assertEquals("Sorry, that movie is not available.", failedResult);
@@ -96,6 +85,7 @@ public class ExampleTest {
 
     @Test
     public void should_Return_Message_When_Return_Movie_Successful_Test() {
+        user.checkOutMovie("001");
         String successfulResult = user.returnMovie("001");
         assertEquals("Thank you for returning the movie!", successfulResult);
     }
@@ -117,7 +107,7 @@ public class ExampleTest {
     public void should_Delete_Borrower_Information_When_Return_Book_Test() {
         user.returnBook("9780321356680");
         assertTrue(user.getBooks().stream().filter(element -> element.getIsbn().equals("9780321356680"))
-                .allMatch(element -> element.getBorrower().equals("")));
+                .allMatch(element -> element.getBorrower().equals("none")));
     }
 
     @Test
@@ -131,7 +121,7 @@ public class ExampleTest {
     public void should_Delete_Borrower_Information_When_Return_Movie_Test() {
         user.returnMovie("001");
         assertTrue(user.getMovies().stream().filter(element -> element.getId().equals("001"))
-                .allMatch(element -> element.getBorrower().equals("")));
+                .allMatch(element -> element.getBorrower().equals("none")));
     }
 
 }

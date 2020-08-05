@@ -16,7 +16,7 @@ public class Movie {
         this.director = director;
         this.rate = rate;
         this.status = true;
-        this.borrower = null;
+        this.borrower = "none";
     }
     public String getId() { return id; }
 

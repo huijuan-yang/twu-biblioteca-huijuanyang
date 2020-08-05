@@ -115,14 +115,13 @@ public class UserOperate extends User {
     public String returnBook(String isbn) {
         String returnResult = "";
         for (Book book : books) {
-            if (book.getIsbn().equals(isbn)) {
+            if (book.getIsbn().equals(isbn) && !book.getAvailable()) {
                 book.setAvailable(true);
-                book.setBorrower(null);
+                book.setBorrower("none");
                 returnResult = result.getReturnBookSuccessful();
                 break;
             } else {
                 returnResult = result.getReturnBookFailed();
-                operate();
             }
         }
 
@@ -178,9 +177,9 @@ public class UserOperate extends User {
     public String returnMovie(String id) {
         String returnResult = "";
         for (Movie movie : movies) {
-            if (movie.getId().equals(id)) {
+            if (movie.getId().equals(id) && !movie.getStatus()) {
                 movie.setStatus(true);
-                movie.setBorrower(null);
+                movie.setBorrower("none");
                 returnResult = result.getReturnMovieSuccessful();
                 break;
             } else {
