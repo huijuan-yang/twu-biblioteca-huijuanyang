@@ -22,7 +22,8 @@ public class UserOperate extends User {
     public void operate() {
         System.out.println("Hi " + this.getName() + "! Please enter your choice:\n 1.All Books  2.Available Books  3.Check Out Book  4.Return Book\n " +
                 "5.All Movies  6.Available Movies  7.Check Out Movie  8.Return Movie\n 9.Quit");
-        int choice = scanner.nextInt();
+        int choice;
+        choice = scanner.nextInt();
         switch (choice) {
             case 1:
                 showAllBooks();
@@ -116,11 +117,12 @@ public class UserOperate extends User {
         for (Book book : books) {
             if (book.getIsbn().equals(isbn)) {
                 book.setAvailable(true);
-                book.setBorrower("");
+                book.setBorrower(null);
                 returnResult = result.getReturnBookSuccessful();
                 break;
             } else {
                 returnResult = result.getReturnBookFailed();
+                operate();
             }
         }
 
@@ -134,7 +136,7 @@ public class UserOperate extends User {
         for (Movie movie : movies) {
             allMoviesList.append("Name: ").append(movie.getName()).append(" | Year: ").append(movie.getYear())
                     .append(" | Director: ").append(movie.getDirector()).append(" | Rate: ")
-                    .append(movie.getRate()).append("\n");
+                    .append(movie.getRate()).append(" | Borrower: ").append(movie.getBorrower()).append("\n");
         }
 
         System.out.println(allMoviesList.toString());
@@ -155,10 +157,10 @@ public class UserOperate extends User {
     }
 
 
-    public String checkOutMovie(String name) {
+    public String checkOutMovie(String id) {
         String checkoutResult = "";
         for (Movie movie : movies) {
-            if (movie.getName().equals(name) && movie.getStatus()) {
+            if (movie.getId().equals(id) && movie.getStatus()) {
                 movie.setStatus(false);
                 movie.setBorrower(this.getLibraryNumber());
                 checkoutResult = result.getCheckOutMovieSuccessful();
@@ -173,12 +175,12 @@ public class UserOperate extends User {
     }
 
 
-    public String returnMovie(String name) {
+    public String returnMovie(String id) {
         String returnResult = "";
         for (Movie movie : movies) {
-            if (movie.getName().equals(name)) {
+            if (movie.getId().equals(id)) {
                 movie.setStatus(true);
-                movie.setBorrower("");
+                movie.setBorrower(null);
                 returnResult = result.getReturnMovieSuccessful();
                 break;
             } else {
@@ -189,4 +191,6 @@ public class UserOperate extends User {
         System.out.println(returnResult);
         return returnResult;
     }
+
+
 }

@@ -32,8 +32,9 @@ public class Library {
                     UserOperate existUser = new UserOperate(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getLibraryNumber(), user.getPassword());
 
                     while (true) {
-                        System.out.println("Please choose your operation: 1.Go into library  2.Quit");
+                        System.out.println("Please enter your option: 1.Go into library  2.Quit");
                         int choice = scanner.nextInt();
+
                         if (choice == 2) {
                             System.out.println("Quit!");
                             return;
@@ -42,6 +43,7 @@ public class Library {
                         } else {
                             System.out.println("Please enter a valid choice!");
                         }
+
                     }
 
                 }
@@ -51,10 +53,11 @@ public class Library {
             System.out.println("Login failed! Please enter valid username and password!");
             login();
 
-    }else if (n == 2) {
+        } else if (n == 2) {
             return;
         } else {
             System.out.println("Please select a valid option!");
+            login();
         }
     }
 

@@ -69,40 +69,40 @@ public class ExampleTest {
     }
 
     @Test
-    public void should_Check_Out_Movie_By_Name_Test() {
-        user.checkOutMovie("The Croods");
-        assertFalse(user.getMovies().stream().filter(element -> element.getName().equals("The Croods"))
+    public void should_Check_Out_Movie_By_Id_Test() {
+        user.checkOutMovie("001");
+        assertFalse(user.getMovies().stream().filter(element -> element.getId().equals("001"))
                 .allMatch(Movie::getStatus));
     }
 
     @Test
     public void should_Return_Message_When_Check_Out_Movie_Successful_Test() {
-        String successfulResult = user.checkOutMovie("The Croods");
+        String successfulResult = user.checkOutMovie("001");
         assertEquals("Thank you! Enjoy the movie!", successfulResult);
     }
 
     @Test
     public void should_Return_Error_Message_When_Check_Out_Movie_Failed_Test() {
-        String failedResult = user.checkOutMovie("1234567890");
+        String failedResult = user.checkOutMovie("999");
         assertEquals("Sorry, that movie is not available.", failedResult);
     }
 
     @Test
-    public void should_Return_Movie_By_Name_Test() {
-        user.returnMovie("The Croods");
-        assertTrue(user.getMovies().stream().filter(element -> element.getName().equals("The Croods"))
+    public void should_Return_Movie_By_Id_Test() {
+        user.returnMovie("001");
+        assertTrue(user.getMovies().stream().filter(element -> element.getId().equals("001"))
                 .allMatch(Movie::getStatus));
     }
 
     @Test
     public void should_Return_Message_When_Return_Movie_Successful_Test() {
-        String successfulResult = user.returnMovie("The Croods");
+        String successfulResult = user.returnMovie("001");
         assertEquals("Thank you for returning the movie!", successfulResult);
     }
 
     @Test
     public void should_Return_Error_Message_When_Return_Movie_Failed_Test() {
-        String failedResult = user.returnMovie("1234567890");
+        String failedResult = user.returnMovie("999");
         assertEquals("That is not a valid movie to return.", failedResult);
     }
 
@@ -122,15 +122,15 @@ public class ExampleTest {
 
     @Test
     public void should_Display_Borrower_Information_When_Check_Out_Movie_Test() {
-        user.checkOutMovie("The Croods");
-        assertTrue(user.getMovies().stream().filter(element -> element.getName().equals("The Croods"))
+        user.checkOutMovie("001");
+        assertTrue(user.getMovies().stream().filter(element -> element.getId().equals("001"))
                 .allMatch(element -> element.getBorrower().equals("123-2345")));
     }
 
     @Test
     public void should_Delete_Borrower_Information_When_Return_Movie_Test() {
-        user.returnMovie("The Croods");
-        assertTrue(user.getMovies().stream().filter(element -> element.getName().equals("The Croods"))
+        user.returnMovie("001");
+        assertTrue(user.getMovies().stream().filter(element -> element.getId().equals("001"))
                 .allMatch(element -> element.getBorrower().equals("")));
     }
 

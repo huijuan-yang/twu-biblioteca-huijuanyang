@@ -16,7 +16,7 @@ public class Book {
         this.author = Objects.requireNonNull(author);
         this.publishedYear = publishedYear;
         this.isAvailable = true;
-        this.borrower = "";
+        this.borrower = null;
     }
 
     public String getIsbn() { return isbn; }

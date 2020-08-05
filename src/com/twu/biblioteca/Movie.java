@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 public class Movie {
+    private final String id;
     private final String name;
     private final int year;
     private final String director;
@@ -8,14 +9,16 @@ public class Movie {
     private boolean status;
     private String borrower;
 
-    public Movie(String name, int year, String director, double rate) {
+    public Movie(String id, String name, int year, String director, double rate) {
+        this.id = id;
         this.name = name;
         this.year = year;
         this.director = director;
         this.rate = rate;
         this.status = true;
-        this.borrower = "";
+        this.borrower = null;
     }
+    public String getId() { return id; }
 
     public String getName() { return name; }
 
